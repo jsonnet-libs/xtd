@@ -1,40 +1,42 @@
 local xtd = import './main.libsonnet';
 
-local trace(v) = std.trace(v,v);
+local trace(v) = std.trace(v, v);
 
+// TestEscapeString
 local TestEscapeString =
-  true
+  local name(case) = 'TestEscapeString:%s failed' % case;
 
-  && xtd.url.escapeString('')
-     == ''
+  assert xtd.url.escapeString('')
+         == ''
+         : name('empty');
 
-  && xtd.url.escapeString('abc')
-     == 'abc'
+  assert xtd.url.escapeString('abc')
+         == 'abc'
+         : name('abc');
 
-  && xtd.url.escapeString('one two')
-     == 'one%20two'
+  assert xtd.url.escapeString('one two')
+         == 'one%20two'
+         : name('space');
 
-  && xtd.url.escapeString('10%')
-     == '10%25'
+  assert xtd.url.escapeString('10%')
+         == '10%25'
+         : name('percent');
 
-  && xtd.url.escapeString(" ?&=#+%!<>#\"{}|\\^[]`☺\t:/@$'()*,;")
-     == '%20%3F%26%3D%23%2B%25%21%3C%3E%23%22%7B%7D%7C%5C%5E%5B%5D%60%E2%98%BA%09%3A%2F%40%24%27%28%29%2A%2C%3B'
-;
+  assert xtd.url.escapeString(" ?&=#+%!<>#\"{}|\\^[]`☺\t:/@$'()*,;")
+         == '%20%3F%26%3D%23%2B%25%21%3C%3E%23%22%7B%7D%7C%5C%5E%5B%5D%60%E2%98%BA%09%3A%2F%40%24%27%28%29%2A%2C%3B'
+         : name('complex');
+  true;
 
 local TestEncodeQuery =
-  true
+  local name(case) = 'TestEncodeQuery:%s failed' % case;
 
-  && xtd.url.encodeQuery({})
-     == ''
+  assert xtd.url.encodeQuery({}) == '' : name('empty');
 
-  && xtd.url.encodeQuery({ q: 'puppies', oe: 'utf8' })
-     == 'oe=utf8&q=puppies'
-;
+  assert xtd.url.encodeQuery({ q: 'puppies', oe: 'utf8' })
+         == 'oe=utf8&q=puppies'
+         : name('simple');
+  true;
 
-local result = true
+true
 && TestEscapeString
 && TestEncodeQuery
-;
-
-assert result;
-result
