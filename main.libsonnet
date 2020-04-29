@@ -1,8 +1,24 @@
 local d = import 'doc-util/main.libsonnet';
 
 {
-  '#url': d.obj('`url` implementes URL query escaping and simplifies queries'),
+  '#': d.pkg(
+    name='xtd',
+    url='github.com/jsonnet-libs/xtd/main.libsonnet',
+    help=|||
+      `xtd` aims to collect useful functions not included in the Jsonnet standard library (`std`).
+
+      This package serves as a test field for functions intended to be contributed to `std`
+      in the future, but also provides a place for less general, yet useful utilities.
+    |||,
+  ),
+
   url: {
+    '#': d.pkg(
+      name='url',
+      url='github.com/jsonnet-libs/xtd/url/main.libsonet',
+      help='`url` implements URL escaping and query building',
+    ),
+
     '#escapeString': d.fn('`escapeString` escapes the given string so it can be safely placed inside an URL, replacing special characters with `%XX` sequences', [d.arg('string', d.T.string)]),
     escapeString(str)::
       local allowedChars = '0123456789abcdefghijklmnopqrstuvwqxyzABCDEFGHIJKLMNOPQRSTUVWQXYZ';

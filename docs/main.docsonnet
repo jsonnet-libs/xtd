@@ -1,9 +1,0 @@
-local d = import 'doc-util/main.libsonnet';
-
-d.new('xtd', url='github.com/jsonnet-libs/xtd/main.libsonnet')
-+ d.withAPI(import '../main.libsonnet')
-+ d.withHelp(|||
-  `xtd` provides useful functions not included in the Jsonnet standard library (`std`).
-
-   We hope for all of these to become part of `std` once proved mature enough.
-|||)

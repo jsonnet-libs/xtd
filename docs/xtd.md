@@ -9,6 +9,7 @@ local xtd = import "github.com/jsonnet-libs/xtd/main.libsonnet"
 This package serves as a test field for functions intended to be included into `std`
 in the future, but also provides a place for less common, yet useful utilities.
 
-## Documentation
 
-API reference docs can be viewed in the [`docs` folder](docs/xtd.md).
+## Subpackages
+
+* [url](url.md)
