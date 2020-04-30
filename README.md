@@ -11,4 +11,4 @@ in the future, but also provides a place for less common, yet useful utilities.
 
 ## Documentation
 
-API reference docs can be viewed in the [`docs` folder](docs/xtd.md).
+API reference docs can be viewed on https://jsonnet-libs.github.io/xtd/

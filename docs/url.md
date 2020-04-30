@@ -1,7 +1,11 @@
+---
+permalink: /url
+---
+
 # package url
 
 ```jsonnet
-local url = import "github.com/jsonnet-libs/xtd/url/main.libsonet"
+local url = import "github.com/jsonnet-libs/xtd/url.libsonnet"
 ```
 
 `url` implements URL escaping and query building
