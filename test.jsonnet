@@ -29,6 +29,10 @@ local TestEscapeString =
   assert xtd.url.escapeString("hello, world", [","])
          == 'hello,%20world'
          : name('exclusions');
+
+  assert xtd.url.escapeString("hello, world,&", [",", '&'])
+         == 'hello,%20world,&'
+         : name('multiple exclusions');
   true;
 
 local TestEncodeQuery =
