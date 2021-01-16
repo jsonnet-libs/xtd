@@ -4,4 +4,4 @@ test:
 
 .PHONY: docs
 docs:
-	jsonnet -J docs/vendor docs/main.docsonnet | docsonnet > README.md
+	docsonnet main.libsonnet

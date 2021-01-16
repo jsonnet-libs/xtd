@@ -1,5 +1,5 @@
 ---
-permalink: /url
+permalink: /url/
 ---
 
 # package url
@@ -13,7 +13,7 @@ local url = import "github.com/jsonnet-libs/xtd/url.libsonnet"
 ## Index
 
 * [`fn encodeQuery(params)`](#fn-encodequery)
-* [`fn escapeString(string)`](#fn-escapestring)
+* [`fn escapeString(str, excludedChars)`](#fn-escapestring)
 
 ## Fields
 
@@ -28,7 +28,7 @@ encodeQuery(params)
 ### fn escapeString
 
 ```ts
-escapeString(string)
+escapeString(str, excludedChars)
 ```
 
 `escapeString` escapes the given string so it can be safely placed inside an URL, replacing special characters with `%XX` sequences
