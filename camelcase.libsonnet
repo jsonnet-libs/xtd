@@ -26,11 +26,11 @@ local d = import 'doc-util/main.libsonnet';
         function(acc, r)
           acc {
             local class =
-              if xtd.isNumber(r)
+              if xtd.ascii.isNumber(r)
               then 1
-              else if xtd.isAsciiLower(r)
+              else if xtd.ascii.isAsciiLower(r)
               then 2
-              else if xtd.isAsciiUpper(r)
+              else if xtd.ascii.isAsciiUpper(r)
               then 3
               else 4,
 
@@ -49,9 +49,9 @@ local d = import 'doc-util/main.libsonnet';
       local fixRunes =
         std.foldl(
           function(runes, i)
-            if xtd.isAsciiUpper(runes[i][0])
-               && xtd.isAsciiLower(runes[i + 1][0])
-               && !xtd.isNumber(runes[i + 1][0])
+            if xtd.ascii.isAsciiUpper(runes[i][0])
+               && xtd.ascii.isAsciiLower(runes[i + 1][0])
+               && !xtd.ascii.isNumber(runes[i + 1][0])
                && runes[i][0] != ' '
                && runes[i + 1][0] != ' '
             then
