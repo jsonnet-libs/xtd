@@ -19,6 +19,7 @@ local d = import 'doc-util/main.libsonnet';
       d.arg('depth', d.T.number),
     ]
   ),
+
   local this = self,
   inspect(object, maxDepth=10, depth=0):
     std.foldl(
@@ -32,11 +33,18 @@ local d = import 'doc-util/main.libsonnet';
               maxDepth,
               depth + 1
             ) }
-          else if std.isFunction(object[p])
-          then { functions+: [p] }
-          else { fields+: [p] }
+          else {
+            [
+            (if !std.objectHas(object, p)
+             then 'hidden_'
+             else '')
+            + (if std.isFunction(object[p])
+               then 'functions'
+               else 'fields')
+            ]+: [p],
+          }
         ),
-      std.objectFields(object),
+      std.objectFieldsAll(object),
       {}
     ),
 }

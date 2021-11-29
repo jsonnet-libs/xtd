@@ -109,7 +109,53 @@ local TestCamelCaseSplit =
   //       : name("BadUTF8\xe2\xe2\xa1");
   true;
 
+local TestInspect =
+  local name(case) = 'TestInspect:%s failed' % case;
+
+  assert xtd.inspect.inspect({})
+         == {}
+         : name('emptyobject');
+
+  assert xtd.inspect.inspect({
+           key: 'value',
+           hidden_key:: 'value',
+           func(value): value,
+           hidden_func(value):: value,
+         })
+         == {
+           fields: ['key'],
+           hidden_fields: ['hidden_key'],
+           functions: ['func'],
+           hidden_functions: ['hidden_func'],
+         }
+         : name('flatObject' + std.toString(xtd.inspect.inspect({})));
+
+  assert xtd.inspect.inspect({
+           nested: {
+             key: 'value',
+             hidden_key:: 'value',
+             func(value): value,
+             hidden_func(value):: value,
+           },
+           key: 'value',
+           hidden_func(value):: value,
+         })
+         == {
+           nested: {
+             fields: ['key'],
+             hidden_fields: ['hidden_key'],
+             functions: ['func'],
+             hidden_functions: ['hidden_func'],
+           },
+           fields: ['key'],
+           hidden_functions: ['hidden_func'],
+         }
+         : name('nestedObject' + std.toString(xtd.inspect.inspect({})));
+  true;
+
+
 true
 && TestEscapeString
 && TestEncodeQuery
 && TestCamelCaseSplit
+&& TestInspect
