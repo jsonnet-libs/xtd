@@ -128,7 +128,7 @@ local TestInspect =
            functions: ['func'],
            hidden_functions: ['hidden_func'],
          }
-         : name('flatObject' + std.toString(xtd.inspect.inspect({})));
+         : name('flatObject');
 
   assert xtd.inspect.inspect({
            nested: {
@@ -150,7 +150,24 @@ local TestInspect =
            fields: ['key'],
            hidden_functions: ['hidden_func'],
          }
-         : name('nestedObject' + std.toString(xtd.inspect.inspect({})));
+         : name('nestedObject');
+
+  assert xtd.inspect.inspect({
+           key: 'value',
+           nested: {
+             key: 'value',
+             nested: {
+               key: 'value',
+             },
+           },
+         }, maxDepth=1)
+         == {
+           fields: ['key'],
+           nested: {
+             fields: ['key', 'nested'],
+           },
+         }
+         : name('maxRecursionDepth');
   true;
 
 
