@@ -9,20 +9,20 @@ local d = import 'doc-util/main.libsonnet';
 
   local cp(c) = std.codepoint(c),
 
-  '#isAsciiLower':: d.fn(
-    '`isAsciiLower` reports whether ASCII character `c` is a lower case letter',
+  '#isLower':: d.fn(
+    '`isLower` reports whether ASCII character `c` is a lower case letter',
     [d.arg('c', d.T.string)]
   ),
-  isAsciiLower(c):
+  isLower(c):
     if cp(c) >= 97 && cp(c) < 123
     then true
     else false,
 
-  '#isAsciiUpper':: d.fn(
-    '`isAsciiUpper` reports whether ASCII character `c` is a upper case letter',
+  '#isUpper':: d.fn(
+    '`isUpper` reports whether ASCII character `c` is a upper case letter',
     [d.arg('c', d.T.string)]
   ),
-  isAsciiUpper(c):
+  isUpper(c):
     if cp(c) >= 65 && cp(c) < 91
     then true
     else false,
