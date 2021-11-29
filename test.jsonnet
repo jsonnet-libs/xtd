@@ -26,11 +26,11 @@ local TestEscapeString =
          == '%20%3F%26%3D%23%2B%25%21%3C%3E%23%22%7B%7D%7C%5C%5E%5B%5D%60%E2%98%BA%09%3A%2F%40%24%27%28%29%2A%2C%3B'
          : name('complex');
 
-  assert xtd.url.escapeString("hello, world", [","])
+  assert xtd.url.escapeString('hello, world', [','])
          == 'hello,%20world'
          : name('exclusions');
 
-  assert xtd.url.escapeString("hello, world,&", [",", '&'])
+  assert xtd.url.escapeString('hello, world,&', [',', '&'])
          == 'hello,%20world,&'
          : name('multiple exclusions');
   true;
@@ -45,6 +45,71 @@ local TestEncodeQuery =
          : name('simple');
   true;
 
+local TestCamelCaseSplit =
+  local name(case) = 'TestCamelCaseSplit:%s failed' % case;
+  assert xtd.camelcase.split('')
+         == ['']
+         : name('nostring');
+  assert xtd.camelcase.split('lowercase')
+         == ['lowercase']
+         : name('lowercase');
+  assert xtd.camelcase.split('Class')
+         == ['Class']
+         : name('Class');
+  assert xtd.camelcase.split('MyClass')
+         == ['My', 'Class']
+         : name('MyClass');
+  assert xtd.camelcase.split('MyC')
+         == ['My', 'C']
+         : name('MyC');
+  assert xtd.camelcase.split('HTML')
+         == ['HTML']
+         : name('HTML');
+  assert xtd.camelcase.split('PDFLoader')
+         == ['PDF', 'Loader']
+         : name('PDFLoader');
+  assert xtd.camelcase.split('AString')
+         == ['A', 'String']
+         : name('AString');
+  assert xtd.camelcase.split('SimpleXMLParser')
+         == ['Simple', 'XML', 'Parser']
+         : name('SimpleXMLParser');
+  assert xtd.camelcase.split('vimRPCPlugin')
+         == ['vim', 'RPC', 'Plugin']
+         : name('vimRPCPlugin');
+  assert xtd.camelcase.split('GL11Version')
+         == ['GL', '11', 'Version']
+         : name('GL11Version');
+  assert xtd.camelcase.split('99Bottles')
+         == ['99', 'Bottles']
+         : name('99Bottles');
+  assert xtd.camelcase.split('May5')
+         == ['May', '5']
+         : name('May5');
+  assert xtd.camelcase.split('BFG9000')
+         == ['BFG', '9000']
+         : name('BFG9000');
+  assert xtd.camelcase.split('Two  spaces')
+         == ['Two', '  ', 'spaces']
+         : name('Two  spaces');
+  assert xtd.camelcase.split('Multiple   Random  spaces')
+         == ['Multiple', '   ', 'Random', '  ', 'spaces']
+         : name('Multiple   Random  spaces');
+
+  // TODO: find or create is(Upper|Lower) for non-ascii characters
+  // Something like this for Jsonnet:
+  // https://cs.opensource.google/go/go/+/refs/tags/go1.17.3:src/unicode/tables.go
+  //assert xtd.camelcase.split('BöseÜberraschung')
+  //       == ['Böse', 'Überraschung']
+  //       : name('BöseÜberraschung');
+
+  // This doesn't even render in Jsonnet
+  //assert xtd.camelcase.split("BadUTF8\xe2\xe2\xa1")
+  //       ==  ["BadUTF8\xe2\xe2\xa1"]
+  //       : name("BadUTF8\xe2\xe2\xa1");
+  true;
+
 true
 && TestEscapeString
 && TestEncodeQuery
+&& TestCamelCaseSplit
