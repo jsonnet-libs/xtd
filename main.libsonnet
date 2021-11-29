@@ -12,5 +12,7 @@ local d = import 'doc-util/main.libsonnet';
     |||,
   ),
 
+  ascii: (import './ascii.libsonnet'),
+  camelcase: (import './camelcase.libsonnet'),
   url: (import './url.libsonnet'),
 }

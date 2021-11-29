@@ -16,4 +16,6 @@ in the future, but also provides a place for less general, yet useful utilities.
 
 ## Subpackages
 
+* [ascii](ascii.md)
+* [camelcase](camelcase.md)
 * [url](url.md)
