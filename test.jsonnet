@@ -109,7 +109,70 @@ local TestCamelCaseSplit =
   //       : name("BadUTF8\xe2\xe2\xa1");
   true;
 
+local TestInspect =
+  local name(case) = 'TestInspect:%s failed' % case;
+
+  assert xtd.inspect.inspect({})
+         == {}
+         : name('emptyobject');
+
+  assert xtd.inspect.inspect({
+           key: 'value',
+           hidden_key:: 'value',
+           func(value): value,
+           hidden_func(value):: value,
+         })
+         == {
+           fields: ['key'],
+           hidden_fields: ['hidden_key'],
+           functions: ['func'],
+           hidden_functions: ['hidden_func'],
+         }
+         : name('flatObject');
+
+  assert xtd.inspect.inspect({
+           nested: {
+             key: 'value',
+             hidden_key:: 'value',
+             func(value): value,
+             hidden_func(value):: value,
+           },
+           key: 'value',
+           hidden_func(value):: value,
+         })
+         == {
+           nested: {
+             fields: ['key'],
+             hidden_fields: ['hidden_key'],
+             functions: ['func'],
+             hidden_functions: ['hidden_func'],
+           },
+           fields: ['key'],
+           hidden_functions: ['hidden_func'],
+         }
+         : name('nestedObject');
+
+  assert xtd.inspect.inspect({
+           key: 'value',
+           nested: {
+             key: 'value',
+             nested: {
+               key: 'value',
+             },
+           },
+         }, maxDepth=1)
+         == {
+           fields: ['key'],
+           nested: {
+             fields: ['key', 'nested'],
+           },
+         }
+         : name('maxRecursionDepth');
+  true;
+
+
 true
 && TestEscapeString
 && TestEncodeQuery
 && TestCamelCaseSplit
+&& TestInspect
