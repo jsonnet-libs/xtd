@@ -3,7 +3,7 @@ local d = import 'doc-util/main.libsonnet';
 {
   '#': d.pkg(
     name='inspect',
-    url='github.com/jsonnet-libs/xtd/ascii.libsonnet',
+    url='github.com/jsonnet-libs/xtd/inspect.libsonnet',
     help='`inspect` implements helper functions for inspecting Jsonnet',
   ),
 
@@ -16,7 +16,7 @@ local d = import 'doc-util/main.libsonnet';
     [
       d.arg('object', d.T.object),
       d.arg('maxDepth', d.T.number),
-      d.arg('depth', d.T.number),
+      //d.arg('depth', d.T.number), // used for recursion, not exposing in docs
     ]
   ),
 
