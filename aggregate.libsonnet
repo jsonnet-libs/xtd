@@ -85,8 +85,8 @@ local d = import 'doc-util/main.libsonnet';
       d.arg('keys', d.T.array),
     ]
   ),
-  aggregateByKeys(arr, keys):
-    local aggregate = self.aggregateByKey(arr, keys[0]);
+  byKeys(arr, keys):
+    local aggregate = self.byKey(arr, keys[0]);
     // if last key in keys
     if std.length(keys) == 1
 
@@ -95,7 +95,7 @@ local d = import 'doc-util/main.libsonnet';
 
     // else aggregate with remaining keys
     else {
-      [k]: self.aggregateByKeys(aggregate[k], keys[1:])
+      [k]: self.byKeys(aggregate[k], keys[1:])
       for k in std.objectFields(aggregate)
     },
 
