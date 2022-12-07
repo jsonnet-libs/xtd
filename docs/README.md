@@ -16,6 +16,7 @@ in the future, but also provides a place for less general, yet useful utilities.
 
 ## Subpackages
 
+* [aggregate](aggregate.md)
 * [ascii](ascii.md)
 * [camelcase](camelcase.md)
 * [inspect](inspect.md)

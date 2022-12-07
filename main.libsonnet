@@ -12,6 +12,7 @@ local d = import 'doc-util/main.libsonnet';
     |||,
   ),
 
+  aggregate: (import './aggregate.libsonnet'),
   ascii: (import './ascii.libsonnet'),
   camelcase: (import './camelcase.libsonnet'),
   inspect: (import './inspect.libsonnet'),
