@@ -5,7 +5,7 @@ permalink: /aggregate/
 # package aggregate
 
 ```jsonnet
-local aggregate = import "github.com/jsonnet-libs/xtd/inspect.libsonnet"
+local aggregate = import "github.com/jsonnet-libs/xtd/aggregate.libsonnet"
 ```
 
 `aggregate` implements helper functions to aggregate arrays of objects into objects with arrays.
