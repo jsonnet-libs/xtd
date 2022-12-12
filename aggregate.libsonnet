@@ -3,7 +3,7 @@ local d = import 'doc-util/main.libsonnet';
 {
   '#': d.pkg(
     name='aggregate',
-    url='github.com/jsonnet-libs/xtd/inspect.libsonnet',
+    url='github.com/jsonnet-libs/xtd/aggregate.libsonnet',
     help=|||
       `aggregate` implements helper functions to aggregate arrays of objects into objects with arrays.
 
