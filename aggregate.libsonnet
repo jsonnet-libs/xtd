@@ -1,6 +1,8 @@
 local d = import 'doc-util/main.libsonnet';
 
 {
+  local this = self,
+
   '#': d.pkg(
     name='aggregate',
     url='github.com/jsonnet-libs/xtd/aggregate.libsonnet',
@@ -95,7 +97,7 @@ local d = import 'doc-util/main.libsonnet';
 
     // else aggregate with remaining keys
     else {
-      [k]: self.byKeys(aggregate[k], keys[1:])
+      [k]: this.byKeys(aggregate[k], keys[1:])
       for k in std.objectFields(aggregate)
     },
 
