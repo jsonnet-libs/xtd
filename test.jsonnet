@@ -170,9 +170,54 @@ local TestInspect =
          : name('maxRecursionDepth');
   true;
 
+local TestStrings =
+  local name(case) = 'TestStrings:%s failed' % case;
+  // Tests for camelcase
+  assert xtd.strings.camelcase("") == ""
+         : name('camelcase an empty string');
+  assert xtd.strings.camelcase("-") == ""
+         : name('camelcase a single dash');
+  assert xtd.strings.camelcase("camel-this") == "CamelThis"
+         : name('camel-this');
+  assert xtd.strings.camelcase("camel this") == "CamelThis"
+         : name('camel this');
+  assert xtd.strings.camelcase("camelThis") == "CamelThis"
+         : name('camelThis');
+  assert xtd.strings.camelcase("--camel---this") == "CamelThis"
+         : name('--camel---this');
+  assert xtd.strings.camelcase("--camel---this",lower=true) == "camelThis"
+         : name('--camel---this lower');
+  assert xtd.strings.camelcase(" camel this_*(*&_") == "CamelThis"
+         : name(' camel this_*(*&_');
+  // Tests for kebabcase
+  assert xtd.strings.kebabcase("") == ""
+         : name('kebabcase an empty string');
+  assert xtd.strings.kebabcase("-") == ""
+         : name('kebabcase a single dash');
+  assert xtd.strings.kebabcase("KebabThis") == "kebab-this"
+         : name('KebabThis');
+  assert xtd.strings.kebabcase("KebabAVeryVeryAnnoyingCamelcasedStringSoMeTiMeSRaNd0mElYWithNumb3r5") 
+              == "kebab-a-very-very-annoying-camelcased-string-so-me-ti-me-s-ra-nd0m-el-y-with-numb3r5"
+         : name('kebabcaseAnnoyingString');
+  assert xtd.strings.kebabcase("!!!Kebab!This_*(*&_") == "kebab-this"
+         : name('!!!Kebab!This_*(*&_');
+  // Tests for snakecase
+  assert xtd.strings.snakecase("") == ""
+         : name('snakecase an empty string');
+  assert xtd.strings.snakecase("-") == ""
+         : name('snakecase a single dash');
+  assert xtd.strings.snakecase("-") == ""
+         : name('snakecase a single dash');
+  assert xtd.strings.snakecase("a-_-_-b-_-_-c") == "a_b_c"
+         : name('snakecase a-b-c');
+  assert xtd.strings.snakecase("SnakeAVeryVeryAnnoyingCamelcasedStringSoMeTiMeSRaNd0mElYWithNumb3r5") 
+              == "snake_a_very_very_annoying_camelcased_string_so_me_ti_me_s_ra_nd0m_el_y_with_numb3r5"
+         : name('snakecaseAnnoyingString');
+  true;
 
 true
 && TestEscapeString
 && TestEncodeQuery
 && TestCamelCaseSplit
 && TestInspect
+&& TestStrings

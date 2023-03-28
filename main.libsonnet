@@ -17,4 +17,5 @@ local d = import 'doc-util/main.libsonnet';
   camelcase: (import './camelcase.libsonnet'),
   inspect: (import './inspect.libsonnet'),
   url: (import './url.libsonnet'),
+  strings: (import './strings.libsonnet'),
 }

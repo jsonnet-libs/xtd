@@ -2,7 +2,7 @@
 permalink: /
 ---
 
-# package xtd
+# xtd
 
 ```jsonnet
 local xtd = import "github.com/jsonnet-libs/xtd/main.libsonnet"
@@ -14,10 +14,9 @@ This package serves as a test field for functions intended to be contributed to 
 in the future, but also provides a place for less general, yet useful utilities.
 
 
-## Subpackages
-
 * [aggregate](aggregate.md)
 * [ascii](ascii.md)
 * [camelcase](camelcase.md)
 * [inspect](inspect.md)
+* [strings](strings.md)
 * [url](url.md)
