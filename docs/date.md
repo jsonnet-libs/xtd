@@ -13,8 +13,8 @@ local date = import "github.com/jsonnet-libs/xtd/date.libsonnet"
 ## Index
 
 * [`fn dayOfWeek(year, month, day)`](#fn-dayofweek)
-* [`fn dayofYear(year, month, day)`](#fn-dayofyear)
-* [`fn isLeap(year)`](#fn-isleap)
+* [`fn dayOfYear(year, month, day)`](#fn-dayofyear)
+* [`fn isLeapYear(year)`](#fn-isleapyear)
 
 ## Fields
 
@@ -26,18 +26,20 @@ dayOfWeek(year, month, day)
 
 `dayOfWeek` returns the day of the week for the given date. 0=Sunday, 1=Monday, etc.
 
-### fn dayofYear
+### fn dayOfYear
 
 ```ts
-dayofYear(year, month, day)
+dayOfYear(year, month, day)
 ```
 
-`dayOfYear` returns the ordinal day of the year for the given date (1-365 for common years, 1-366 for leap years).
+`dayOfYear` calculates the ordinal day of the year based on the given date. The range of outputs is 1-365
+for common years, and 1-366 for leap years.
 
-### fn isLeap
+
+### fn isLeapYear
 
 ```ts
-isLeap(year)
+isLeapYear(year)
 ```
 
-`isLeap` returns true if the given year is a leap year.
+`isLeapYear` returns true if the given year is a leap year.
