@@ -48,7 +48,9 @@ local d = import 'doc-util/main.libsonnet';
   ),
   dayOfYear(year, month, day)::
     std.foldl(
-      function(a, b) a + b, std.slice(commonYearMonthLength, 0, month - 1, 1), 0
+      function(a, b) a + b,
+      std.slice(commonYearMonthLength, 0, month - 1, 1),
+      0
     ) + day +
     if month > 2 && self.isLeapYear(year)
     then 1
