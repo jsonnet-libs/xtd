@@ -19,5 +19,6 @@ in the future, but also provides a place for less general, yet useful utilities.
 * [aggregate](aggregate.md)
 * [ascii](ascii.md)
 * [camelcase](camelcase.md)
+* [date](date.md)
 * [inspect](inspect.md)
 * [url](url.md)

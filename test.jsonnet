@@ -170,9 +170,85 @@ local TestInspect =
          : name('maxRecursionDepth');
   true;
 
+local TestIsLeapYear =
+  local name(case) = 'TestIsLeapYear:%s failed' % case;
 
+  assert !xtd.date.isLeapYear(1995)
+         : name('commonYear');
+
+  assert xtd.date.isLeapYear(1996)
+         : name('fourYearCycle');
+
+  assert xtd.date.isLeapYear(2000)
+         : name('fourHundredYearCycle');
+
+  assert !xtd.date.isLeapYear(2100)
+         : name('hundredYearCycle');
+
+  true;
+
+local TestDayOfWeek =
+  local name(case) = 'TestDayOfWeek:%s failed' % case;
+
+  assert xtd.date.dayOfWeek(2000, 1, 1)
+         == 6
+         : name('leapYearStart');
+
+  assert xtd.date.dayOfWeek(2000, 12, 31)
+         == 0
+         : name('leapYearEnd');
+
+  assert xtd.date.dayOfWeek(1995, 1, 1)
+         == 0
+         : name('commonYearStart');
+
+  assert xtd.date.dayOfWeek(2003, 12, 31)
+         == 3
+         : name('commonYearEnd');
+
+  assert xtd.date.dayOfWeek(2024, 7, 19)
+         == 5
+         : name('leapYearMid');
+
+  assert xtd.date.dayOfWeek(2023, 6, 15)
+         == 4
+         : name('commonYearMid');
+
+  true;
+
+local TestDayOfYear =
+  local name(case) = 'TestDayOfYear:%s failed' % case;
+
+  assert xtd.date.dayOfYear(2000, 1, 1)
+         == 1
+         : name('leapYearStart');
+
+  assert xtd.date.dayOfYear(2000, 12, 31)
+         == 366
+         : name('leapYearEnd');
+
+  assert xtd.date.dayOfYear(1995, 1, 1)
+         == 1
+         : name('commonYearStart');
+
+  assert xtd.date.dayOfYear(2003, 12, 31)
+         == 365
+         : name('commonYearEnd');
+
+  assert xtd.date.dayOfYear(2024, 7, 19)
+         == 201
+         : name('leapYearMid');
+
+  assert xtd.date.dayOfYear(2023, 6, 15)
+         == 166
+         : name('commonYearMid');
+
+  true;
 true
 && TestEscapeString
 && TestEncodeQuery
 && TestCamelCaseSplit
 && TestInspect
+&& TestIsLeapYear
+&& TestDayOfWeek
+&& TestDayOfYear
