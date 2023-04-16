@@ -74,9 +74,9 @@ local d = import 'doc-util/main.libsonnet';
       Output:
       ```json
       {
-          "add +": "added",
-          "change ~": "~[ this , changed ]",
-          "remove -": "removed"
+        "add +": "added",
+        "change ~": "~[ this , changed ]",
+        "remove -": "removed"
       }
       ```
     |||,

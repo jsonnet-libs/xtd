@@ -47,9 +47,9 @@ diff(input1, input2),
 Output:
 ```json
 {
-    "add +": "added",
-    "change ~": "~[ this , changed ]",
-    "remove -": "removed"
+  "add +": "added",
+  "change ~": "~[ this , changed ]",
+  "remove -": "removed"
 }
 ```
 
