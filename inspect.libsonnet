@@ -47,4 +47,100 @@ local d = import 'doc-util/main.libsonnet';
       std.objectFieldsAll(object),
       {}
     ),
+
+  '#diff':: d.fn(
+    |||
+      `diff` returns a JSON object describing the differences between two inputs. It
+      attemps to show diffs in nested objects and arrays too.
+
+      Simple example:
+
+      ```jsonnet
+      {
+        local input1 = {
+          same: 'same',
+          change: 'this',
+          remove: 'removed',
+        },
+        local input2 = {
+          same: 'same',
+          change: 'changed',
+          add: 'added',
+        },
+        output: diff(input1, input2),
+      }
+      ```
+
+      Output:
+      ```json
+      "output": {
+          "add +": "added",
+          "change ~": "~[ this , changed ]",
+          "remove -": "removed"
+      }
+      ```
+    |||,
+    [
+      d.arg('input1', d.T.any),
+      d.arg('input2', d.T.any),
+    ]
+  ),
+
+  diff(input1, input2)::
+    if input1 == input2
+    then ''
+    else if std.isArray(input1) && std.isArray(input2)
+    then
+      [
+        if input1[i] != input2[i]
+        then
+          this.diff(
+            input1[i],
+            input2[i]
+          )
+        else input2[i]
+        for i in std.range(0, std.length(input2) - 1)
+        if std.length(input1) > i
+      ]
+      + (if std.length(input1) < std.length(input2)
+         then [
+           '+ ' + input2[i]
+           for i in std.range(std.length(input1), std.length(input2) - 1)
+         ]
+         else [])
+      + (if std.length(input1) > std.length(input2)
+         then [
+           '- ' + input1[i]
+           for i in std.range(std.length(input2), std.length(input1) - 1)
+         ]
+         else [])
+
+    else if std.isObject(input1) && std.isObject(input2)
+    then std.foldl(
+           function(acc, k)
+             acc + (
+               if k in input1 && input1[k] != input2[k]
+               then {
+                 [k + ' ~']:
+                   this.diff(
+                     input1[k],
+                     input2[k]
+                   ),
+               }
+               else if !(k in input1)
+               then {
+                 [k + ' +']: input2[k],
+               }
+               else {}
+             ),
+           std.objectFields(input2),
+           {},
+         )
+         + {
+           [l + ' -']: input1[l]
+           for l in std.objectFields(input1)
+           if !(l in input2)
+         }
+
+    else '~[ %s ]' % std.join(' , ', [std.toString(input1), std.toString(input2)]),
 }
