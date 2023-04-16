@@ -56,24 +56,24 @@ local d = import 'doc-util/main.libsonnet';
       Simple example:
 
       ```jsonnet
-      {
-        local input1 = {
-          same: 'same',
-          change: 'this',
-          remove: 'removed',
-        },
-        local input2 = {
-          same: 'same',
-          change: 'changed',
-          add: 'added',
-        },
-        output: diff(input1, input2),
-      }
+      local input1 = {
+        same: 'same',
+        change: 'this',
+        remove: 'removed',
+      };
+
+      local input2 = {
+        same: 'same',
+        change: 'changed',
+        add: 'added',
+      };
+
+      diff(input1, input2),
       ```
 
       Output:
       ```json
-      "output": {
+      {
           "add +": "added",
           "change ~": "~[ this , changed ]",
           "remove -": "removed"
