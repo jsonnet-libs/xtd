@@ -1,14 +1,18 @@
----
-permalink: /ascii/
----
+# ascii
 
-# package ascii
+`ascii` implements helper functions for ascii characters
+
+## Install
+
+```
+jb install github.com/jsonnet-libs/xtd/ascii.libsonnet@master
+```
+
+## Usage
 
 ```jsonnet
 local ascii = import "github.com/jsonnet-libs/xtd/ascii.libsonnet"
 ```
-
-`ascii` implements helper functions for ascii characters
 
 ## Index
 

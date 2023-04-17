@@ -1,14 +1,18 @@
----
-permalink: /inspect/
----
+# inspect
 
-# package inspect
+`inspect` implements helper functions for inspecting Jsonnet
+
+## Install
+
+```
+jb install github.com/jsonnet-libs/xtd/inspect.libsonnet@master
+```
+
+## Usage
 
 ```jsonnet
 local inspect = import "github.com/jsonnet-libs/xtd/inspect.libsonnet"
 ```
-
-`inspect` implements helper functions for inspecting Jsonnet
 
 ## Index
 
@@ -62,3 +66,4 @@ inspect(object, maxDepth)
 
 `inspect` reports the structure of a Jsonnet object with a recursion depth of
 `maxDepth` (default maxDepth=10).
+

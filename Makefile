@@ -13,4 +13,7 @@ test:
 
 .PHONY: docs
 docs:
-	docsonnet main.libsonnet
+	@rm -rf ./docs; \
+	jb install; \
+	jsonnet -J ./vendor -S -c -m ./docs \
+		--exec "(import 'doc-util/main.libsonnet').render(import 'main.libsonnet')"

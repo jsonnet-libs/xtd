@@ -1,12 +1,4 @@
----
-permalink: /aggregate/
----
-
-# package aggregate
-
-```jsonnet
-local aggregate = import "github.com/jsonnet-libs/xtd/aggregate.libsonnet"
-```
+# aggregate
 
 `aggregate` implements helper functions to aggregate arrays of objects into objects with arrays.
 
@@ -48,6 +40,18 @@ Output:
 ```
 
 
+## Install
+
+```
+jb install github.com/jsonnet-libs/xtd/aggregate.libsonnet@master
+```
+
+## Usage
+
+```jsonnet
+local aggregate = import "github.com/jsonnet-libs/xtd/aggregate.libsonnet"
+```
+
 ## Index
 
 * [`fn byKey(arr, key)`](#fn-bykey)
@@ -72,3 +76,4 @@ byKeys(arr, keys)
 
 `byKey` aggregates an array by iterating over `keys`, each item in `keys` nests the
 aggregate one layer deeper.
+

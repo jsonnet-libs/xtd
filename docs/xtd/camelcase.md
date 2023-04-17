@@ -1,14 +1,18 @@
----
-permalink: /camelcase/
----
+# camelcase
 
-# package camelcase
+`camelcase` can split camelCase words into an array of words.
+
+## Install
+
+```
+jb install github.com/jsonnet-libs/xtd/camelcase.libsonnet@master
+```
+
+## Usage
 
 ```jsonnet
 local camelcase = import "github.com/jsonnet-libs/xtd/camelcase.libsonnet"
 ```
-
-`camelcase` can split camelCase words into an array of words.
 
 ## Index
 
@@ -27,3 +31,4 @@ digits. Both lower camel case and upper camel case are supported. It only suppor
 ASCII characters.
 For more info please check: http://en.wikipedia.org/wiki/CamelCase
 Based on https://github.com/fatih/camelcase/
+

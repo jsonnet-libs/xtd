@@ -1,14 +1,18 @@
----
-permalink: /url/
----
+# url
 
-# package url
+`url` implements URL escaping and query building
+
+## Install
+
+```
+jb install github.com/jsonnet-libs/xtd/url.libsonnet@master
+```
+
+## Usage
 
 ```jsonnet
 local url = import "github.com/jsonnet-libs/xtd/url.libsonnet"
 ```
-
-`url` implements URL escaping and query building
 
 ## Index
 

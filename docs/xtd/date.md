@@ -1,14 +1,18 @@
----
-permalink: /date/
----
+# date
 
-# package date
+`time` provides various date related functions.
+
+## Install
+
+```
+jb install github.com/jsonnet-libs/xtd/date.libsonnet@master
+```
+
+## Usage
 
 ```jsonnet
 local date = import "github.com/jsonnet-libs/xtd/date.libsonnet"
 ```
-
-`time` provides various date related functions.
 
 ## Index
 
