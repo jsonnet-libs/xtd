@@ -170,6 +170,73 @@ local TestInspect =
          : name('maxRecursionDepth');
   true;
 
+
+local TestDiff =
+  local name(case) = 'TestDiff:%s failed' % case;
+
+  assert (
+    xtd.inspect.diff('', '')
+    == ''
+  ) : name('noDiff');
+
+  assert (
+    xtd.inspect.diff('string', true)
+    == '~[ string , true ]'
+  ) : name('typeDiff');
+
+  assert (
+    local input1 = {
+      same: 'same',
+      change: 'this',
+      remove: 'removed',
+    };
+    local input2 = {
+      same: 'same',
+      change: 'changed',
+      add: 'added',
+    };
+    xtd.inspect.diff(input1, input2)
+    == {
+      'add +': 'added',
+      'change ~': '~[ this , changed ]',
+      'remove -': 'removed',
+    }
+  ) : name('objectDiff');
+
+  assert (
+    local input1 = [
+      'same',
+      'this',
+      [
+        'same',
+        'this',
+      ],
+      'remove',
+    ];
+    local input2 = [
+      'same',
+      'changed',
+      [
+        'same',
+        'changed',
+        'added',
+      ],
+    ];
+    xtd.inspect.diff(input1, input2)
+    == [
+      'same',
+      '~[ this , changed ]',
+      [
+        'same',
+        '~[ this , changed ]',
+        '+ added',
+      ],
+      '- remove',
+    ]
+  ) : name('arrayDiff');
+
+  true;
+
 local TestIsLeapYear =
   local name(case) = 'TestIsLeapYear:%s failed' % case;
 
@@ -249,6 +316,7 @@ true
 && TestEncodeQuery
 && TestCamelCaseSplit
 && TestInspect
+&& TestDiff
 && TestIsLeapYear
 && TestDayOfWeek
 && TestDayOfYear
