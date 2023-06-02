@@ -284,3 +284,22 @@ test.new(std.thisFile)
     }],
   )
 )
++ test.case.new(
+  name='array with filter expression - has key',
+  test=test.expect.eq(
+    actual=jsonpath.getJSONPath(
+      { key: [
+        {
+          key1: 'value',
+        },
+        {
+          key2: 'value',
+        },
+      ] },
+      '.key[?(@.key1)]'
+    ),
+    expected=[{
+      key1: 'value',
+    }],
+  )
+)
