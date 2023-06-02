@@ -13,9 +13,12 @@ local d = import 'doc-util/main.libsonnet';
   ),
 
   aggregate: (import './aggregate.libsonnet'),
+  array: (import './array.libsonnet'),
   ascii: (import './ascii.libsonnet'),
-  date: (import './date.libsonnet'),
   camelcase: (import './camelcase.libsonnet'),
+  date: (import './date.libsonnet'),
   inspect: (import './inspect.libsonnet'),
+  jsonpath: (import './jsonpath.libsonnet'),
+  string: (import './string.libsonnet'),
   url: (import './url.libsonnet'),
 }
