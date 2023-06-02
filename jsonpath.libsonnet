@@ -108,33 +108,32 @@ local d = import 'doc-util/main.libsonnet';
       '<'(a, b): a < b,
       '>'(a, b): a > b,
     };
-    local operands = std.reverse(  // reverse to match '<=' before '<'
-      std.objectFields(operandFunctions)
+
+    local findOperands = std.filter(
+      function(op) std.length(std.findSubstr(op, expr)) > 0,
+      std.reverse(  // reverse to match '<=' before '<'
+        std.objectFields(operandFunctions)
+      )
     );
 
-    local findOperand =
-      [
-        local s = [
-          std.stripChars(i, ' ')
-          for i in std.splitLimit(expr, op, 1)
-        ];
-        function(x)
-          if s[0] in x
-          then
-            local left = x[s[0]];
-            local right =
-              if std.isNumber(left)
-              then std.parseInt(s[1])  // Only parse if comparing numbers
-              else s[1];
-            operandFunctions[op](left, right)
-          else false
-        for op in operands
-        if std.length(std.findSubstr(op, expr)) > 0
-      ]
-      + [
-        // Default to key matching
-        function(x) (expr in x),
+    if std.length(findOperands) > 0
+    then
+      local op = findOperands[0];
+      local s = [
+        std.stripChars(i, ' ')
+        for i in std.splitLimit(expr, op, 1)
       ];
-
-    findOperand[0],  // use first match
+      function(x)
+        if s[0] in x
+        then
+          local left = x[s[0]];
+          local right =
+            if std.isNumber(left)
+            then std.parseInt(s[1])  // Only parse if comparing numbers
+            else s[1];
+          operandFunctions[op](left, right)
+        else false
+    else
+      // Default to key matching
+      function(x) (expr in x),
 }
