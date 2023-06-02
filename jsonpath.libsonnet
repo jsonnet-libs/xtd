@@ -19,13 +19,14 @@ local d = import 'doc-util/main.libsonnet';
     [
       d.arg('source', d.T.any),
       d.arg('path', d.T.string,),
+      d.arg('default', d.T.any, default='null'),
     ]
   ),
-  getJSONPath(source, path):
+  getJSONPath(source, path, default=null):
     local _path = self.convertBracketToDot(path);
     std.foldl(
       function(acc, key)
-        get(acc, key),
+        get(acc, key, default),
       xtd.string.splitEscape(_path, '.'),
       source,
     ),
@@ -51,14 +52,14 @@ local d = import 'doc-util/main.libsonnet';
       ])
     else path,
 
-  local get(source, key) =
+  local get(source, key, default) =
     if key == ''
        || key == '$'
        || key == '*'
     then source
     else if std.isArray(source)
     then getFromArray(source, key)
-    else source[key],
+    else std.get(source, key, default),
 
   local getFromArray(arr, key) =
     if std.startsWith(key, '?(@\\.')
