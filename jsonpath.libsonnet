@@ -26,7 +26,9 @@ local d = import 'doc-util/main.libsonnet';
     local _path = self.convertBracketToDot(path);
     std.foldl(
       function(acc, key)
-        get(acc, key, default),
+        if acc == null
+        then acc
+        else get(acc, key, default),
       xtd.string.splitEscape(_path, '.'),
       source,
     ),
