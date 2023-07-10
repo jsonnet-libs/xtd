@@ -89,6 +89,10 @@ local d = import 'doc-util/main.libsonnet';
       [if hasPort then 'port']: port,
     },
 
+  '#join': d.fn(
+    '`join` joins URLs from the object generated from `parse`',
+    args=[d.arg('splitObj', d.T.object)],
+  ),
   join(splitObj):
     std.join('', [
       if 'scheme' in splitObj then splitObj.scheme + ':' else '',
