@@ -178,9 +178,9 @@ local d = import 'doc-util/main.libsonnet';
       )
     else [],
 
-  '#getKubernetesObjects':: d.fn(
+  '#filterKubernetesObjects':: d.fn(
     |||
-      `getKubernetesObjects` implements `filterObjects` to return all Kubernetes objects in
+      `filterKubernetesObjects` implements `filterObjects` to return all Kubernetes objects in
       an array, assuming that Kubernetes object are characterized by having an
       `apiVersion` and `kind` field.
 
@@ -193,7 +193,7 @@ local d = import 'doc-util/main.libsonnet';
       d.arg('kind', d.T.string, default=''),
     ]
   ),
-  getKubernetesObjects(object, kind=''):
+  filterKubernetesObjects(object, kind=''):
     self.filterObjects(
       object,
       keyF=function(object)
