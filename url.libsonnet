@@ -71,6 +71,11 @@ local d = import 'doc-util/main.libsonnet';
     local userInfoSplit = std.reverse(std.splitLimitR(netLoc, '@', 1));
     local userInfo = userInfoSplit[1];
 
+    local hasPassword = hasUserInfo && std.member(userInfo, ':');
+    local passwordSplit = std.splitLimitR(userInfo, ':', 1);
+    local username = passwordSplit[0];
+    local password = passwordSplit[1];
+
     local hasPort = hasNetLoc && std.length(std.findSubstr(':', userInfoSplit[0])) > 0;
     local portSplit = std.splitLimitR(userInfoSplit[0], ':', 1);
     local host = portSplit[0];
@@ -84,8 +89,9 @@ local d = import 'doc-util/main.libsonnet';
       [if hasQuery then 'query']: query,
       [if hasFragment then 'fragment']: fragment,
 
-      [if hasUserInfo then 'userinfo']: userInfo,
-      [if hasNetLoc then 'host']: host,
+      [if hasUserInfo then 'username']: username,
+      [if hasPassword then 'password']: password,
+      [if hasNetLoc then 'hostname']: host,
       [if hasPort then 'port']: port,
     },
 

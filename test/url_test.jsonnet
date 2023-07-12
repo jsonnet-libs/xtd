@@ -82,7 +82,7 @@ test.new(std.thisFile)
     expected={
       scheme: 'https',
       netloc: 'example.com',
-      host: 'example.com',
+      hostname: 'example.com',
       path: '/path/to/location',
       params: 'type=person',
       query: 'name=john',
@@ -98,7 +98,7 @@ test.new(std.thisFile)
     expected={
       scheme: 'https',
       netloc: 'example.com',
-      host: 'example.com',
+      hostname: 'example.com',
       path: '/path/to/location',
       fragment: 'address;type=person?name=john',
     },
@@ -112,7 +112,7 @@ test.new(std.thisFile)
     expected={
       scheme: 'https',
       netloc: 'example.com',
-      host: 'example.com',
+      hostname: 'example.com',
       path: '/path/to/location',
       params: 'type=person',
       fragment: 'address',
@@ -127,7 +127,7 @@ test.new(std.thisFile)
     expected={
       scheme: 'https',
       netloc: 'example.com',
-      host: 'example.com',
+      hostname: 'example.com',
       path: '/path/to/location',
       query: 'name=john',
       fragment: 'address',
@@ -142,7 +142,7 @@ test.new(std.thisFile)
     expected={
       scheme: 'https',
       netloc: 'example.com',
-      host: 'example.com',
+      hostname: 'example.com',
       path: '/path/to/location',
       fragment: '',
     },
@@ -155,7 +155,7 @@ test.new(std.thisFile)
     actual=xtd.url.parse('//example.com:80'),
     expected={
       netloc: 'example.com:80',
-      host: 'example.com',
+      hostname: 'example.com',
       port: '80',
     },
   )
@@ -178,10 +178,11 @@ test.new(std.thisFile)
     actual=xtd.url.parse('ftp://admin:password@example.com'),
 
     expected={
-      host: 'example.com',
+      hostname: 'example.com',
       netloc: 'admin:password@example.com',
       scheme: 'ftp',
-      userinfo: 'admin:password',
+      username: 'admin',
+      password: 'password',
     }
     ,
   )
