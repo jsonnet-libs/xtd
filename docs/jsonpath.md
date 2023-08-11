@@ -13,7 +13,7 @@ local jsonpath = import "github.com/jsonnet-libs/xtd/jsonpath.libsonnet"
 ## Index
 
 * [`fn convertBracketToDot(path)`](#fn-convertbrackettodot)
-* [`fn getJSONPath(source, path)`](#fn-getjsonpath)
+* [`fn getJSONPath(source, path, default='null')`](#fn-getjsonpath)
 * [`fn parseFilterExpr(path)`](#fn-parsefilterexpr)
 
 ## Fields
@@ -32,7 +32,7 @@ This function does not support  escaping brackets/quotes in path keys.
 ### fn getJSONPath
 
 ```ts
-getJSONPath(source, path)
+getJSONPath(source, path, default='null')
 ```
 
 `getJSONPath` gets the value at `path` from `source` where path is a JSONPath.
