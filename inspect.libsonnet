@@ -146,33 +146,33 @@ local d = import 'doc-util/main.libsonnet';
     |||
       `filterObjects` walks a JSON tree returning all matching objects in an array.
 
-      The `object` argument can either be an object or an array, other types will be
+      The `x` argument can either be an object or an array, other types will be
       ignored.
     |||,
     args=[
-      d.arg('object', d.T.any),
       d.arg('filter_func', d.T.func),
+      d.arg('x', d.T.any),
     ]
   ),
-  filterObjects(object, filter_func):
-    if std.isObject(object)
+  filterObjects(filter_func, x):
+    if std.isObject(x)
     then
-      if filter_func(object)
-      then object
+      if filter_func(x)
+      then x
       else
         std.foldl(
           function(acc, o)
-            acc + self.filterObjects(object[o], filter_func),
-          std.objectFields(object),
+            acc + self.filterObjects(x[o], filter_func),
+          std.objectFields(x),
           []
         )
-    else if std.isArray(object)
+    else if std.isArray(x)
     then
       std.flattenArrays(
         std.map(
           function(obj)
             self.filterObjects(obj, filter_func),
-          object
+          x
         )
       )
     else [],
@@ -194,10 +194,10 @@ local d = import 'doc-util/main.libsonnet';
   ),
   filterKubernetesObjects(object, kind=''):
     local objects = self.filterObjects(
-      object,
       function(object)
         std.objectHas(object, 'apiVersion')
         && std.objectHas(object, 'kind'),
+      object,
     );
     if kind == ''
     then objects
