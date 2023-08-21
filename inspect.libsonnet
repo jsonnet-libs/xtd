@@ -151,18 +151,18 @@ local d = import 'doc-util/main.libsonnet';
     |||,
     args=[
       d.arg('object', d.T.any),
-      d.arg('keyF', d.T.func),
+      d.arg('filter_func', d.T.func),
     ]
   ),
-  filterObjects(object, keyF):
+  filterObjects(object, filter_func):
     if std.isObject(object)
     then
-      if keyF(object)
+      if filter_func(object)
       then object
       else
         std.foldl(
           function(acc, o)
-            acc + self.filterObjects(object[o], keyF),
+            acc + self.filterObjects(object[o], filter_func),
           std.objectFields(object),
           []
         )
@@ -171,7 +171,7 @@ local d = import 'doc-util/main.libsonnet';
       std.flattenArrays(
         std.map(
           function(obj)
-            self.filterObjects(obj, keyF),
+            self.filterObjects(obj, filter_func),
           object
         )
       )
@@ -195,7 +195,7 @@ local d = import 'doc-util/main.libsonnet';
   filterKubernetesObjects(object, kind=''):
     local objects = self.filterObjects(
       object,
-      keyF=function(object)
+      function(object)
         std.objectHas(object, 'apiVersion')
         && std.objectHas(object, 'kind'),
     );
