@@ -14,7 +14,7 @@ local inspect = import "github.com/jsonnet-libs/xtd/inspect.libsonnet"
 
 * [`fn diff(input1, input2)`](#fn-diff)
 * [`fn filterKubernetesObjects(object, kind='')`](#fn-filterkubernetesobjects)
-* [`fn filterObjects(object, keyF, valueF='function(obj) [obj]')`](#fn-filterobjects)
+* [`fn filterObjects(object, keyF)`](#fn-filterobjects)
 * [`fn inspect(object, maxDepth)`](#fn-inspect)
 
 ## Fields
@@ -74,7 +74,7 @@ be returned.
 ### fn filterObjects
 
 ```ts
-filterObjects(object, keyF, valueF='function(obj) [obj]')
+filterObjects(object, keyF)
 ```
 
 `filterObjects` walks a JSON tree returning all matching objects in an array.
