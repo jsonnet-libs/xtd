@@ -1,12 +1,13 @@
 local d = import 'doc-util/main.libsonnet';
 
 {
+  local this = self,
+
   '#': d.pkg(
     name='inspect',
     url='github.com/jsonnet-libs/xtd/inspect.libsonnet',
     help='`inspect` implements helper functions for inspecting Jsonnet',
   ),
-
 
   '#inspect':: d.fn(
     |||
@@ -19,8 +20,6 @@ local d = import 'doc-util/main.libsonnet';
       //d.arg('depth', d.T.number), // used for recursion, not exposing in docs
     ]
   ),
-
-  local this = self,
   inspect(object, maxDepth=10, depth=0):
     std.foldl(
       function(acc, p)
@@ -85,7 +84,6 @@ local d = import 'doc-util/main.libsonnet';
       d.arg('input2', d.T.any),
     ]
   ),
-
   diff(input1, input2)::
     if input1 == input2
     then ''
@@ -143,4 +141,69 @@ local d = import 'doc-util/main.libsonnet';
          }
 
     else '~[ %s ]' % std.join(' , ', [std.toString(input1), std.toString(input2)]),
+
+  '#filterObjects':: d.fn(
+    |||
+      `filterObjects` walks a JSON tree returning all matching objects in an array.
+
+      The `x` argument can either be an object or an array, other types will be
+      ignored.
+    |||,
+    args=[
+      d.arg('filter_func', d.T.func),
+      d.arg('x', d.T.any),
+    ]
+  ),
+  filterObjects(filter_func, x):
+    if std.isObject(x)
+    then
+      if filter_func(x)
+      then x
+      else
+        std.foldl(
+          function(acc, o)
+            acc + self.filterObjects(x[o], filter_func),
+          std.objectFields(x),
+          []
+        )
+    else if std.isArray(x)
+    then
+      std.flattenArrays(
+        std.map(
+          function(obj)
+            self.filterObjects(obj, filter_func),
+          x
+        )
+      )
+    else [],
+
+  '#filterKubernetesObjects':: d.fn(
+    |||
+      `filterKubernetesObjects` implements `filterObjects` to return all Kubernetes objects in
+      an array, assuming that Kubernetes object are characterized by having an
+      `apiVersion` and `kind` field.
+
+      The `object` argument can either be an object or an array, other types will be
+      ignored. The `kind` allows to filter out a specific kind, if unset all kinds will
+      be returned.
+    |||,
+    args=[
+      d.arg('object', d.T.any),
+      d.arg('kind', d.T.string, default=''),
+    ]
+  ),
+  filterKubernetesObjects(object, kind=''):
+    local objects = self.filterObjects(
+      function(object)
+        std.objectHas(object, 'apiVersion')
+        && std.objectHas(object, 'kind'),
+      object,
+    );
+    if kind == ''
+    then objects
+    else
+      std.filter(
+        function(o) o.kind == kind,
+        objects
+      ),
 }

@@ -13,6 +13,8 @@ local inspect = import "github.com/jsonnet-libs/xtd/inspect.libsonnet"
 ## Index
 
 * [`fn diff(input1, input2)`](#fn-diff)
+* [`fn filterKubernetesObjects(object, kind='')`](#fn-filterkubernetesobjects)
+* [`fn filterObjects(filter_func, x)`](#fn-filterobjects)
 * [`fn inspect(object, maxDepth)`](#fn-inspect)
 
 ## Fields
@@ -52,6 +54,33 @@ Output:
   "remove -": "removed"
 }
 ```
+
+
+### fn filterKubernetesObjects
+
+```ts
+filterKubernetesObjects(object, kind='')
+```
+
+`filterKubernetesObjects` implements `filterObjects` to return all Kubernetes objects in
+an array, assuming that Kubernetes object are characterized by having an
+`apiVersion` and `kind` field.
+
+The `object` argument can either be an object or an array, other types will be
+ignored. The `kind` allows to filter out a specific kind, if unset all kinds will
+be returned.
+
+
+### fn filterObjects
+
+```ts
+filterObjects(filter_func, x)
+```
+
+`filterObjects` walks a JSON tree returning all matching objects in an array.
+
+The `x` argument can either be an object or an array, other types will be
+ignored.
 
 
 ### fn inspect
