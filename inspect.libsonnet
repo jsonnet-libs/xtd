@@ -158,7 +158,7 @@ local d = import 'doc-util/main.libsonnet';
     if std.isObject(x)
     then
       if filter_func(x)
-      then x
+      then [x]
       else
         std.foldl(
           function(acc, o)
