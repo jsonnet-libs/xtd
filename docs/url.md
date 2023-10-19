@@ -2,7 +2,7 @@
 permalink: /url/
 ---
 
-# package url
+# url
 
 ```jsonnet
 local url = import "github.com/jsonnet-libs/xtd/url.libsonnet"

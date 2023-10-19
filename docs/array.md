@@ -2,7 +2,7 @@
 permalink: /array/
 ---
 
-# package array
+# array
 
 ```jsonnet
 local array = import "github.com/jsonnet-libs/xtd/array.libsonnet"

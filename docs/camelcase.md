@@ -2,7 +2,7 @@
 permalink: /camelcase/
 ---
 
-# package camelcase
+# camelcase
 
 ```jsonnet
 local camelcase = import "github.com/jsonnet-libs/xtd/camelcase.libsonnet"

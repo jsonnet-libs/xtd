@@ -2,7 +2,7 @@
 permalink: /date/
 ---
 
-# package date
+# date
 
 ```jsonnet
 local date = import "github.com/jsonnet-libs/xtd/date.libsonnet"

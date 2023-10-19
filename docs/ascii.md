@@ -2,7 +2,7 @@
 permalink: /ascii/
 ---
 
-# package ascii
+# ascii
 
 ```jsonnet
 local ascii = import "github.com/jsonnet-libs/xtd/ascii.libsonnet"
