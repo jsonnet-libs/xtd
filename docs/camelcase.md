@@ -36,6 +36,6 @@ Based on https://github.com/fatih/camelcase/
 toCamelCase(str)
 ```
 
-`toCamelCase` transforms a string to camelCase format, splitting words by the `-` or `_` separators.
+`toCamelCase` transforms a string to camelCase format, splitting words by the `-`, `_` or spaces.
 For example: `hello_world` becomes `helloWorld`.
 For more info please check: http://en.wikipedia.org/wiki/CamelCase
