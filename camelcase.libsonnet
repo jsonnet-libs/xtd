@@ -77,4 +77,24 @@ local d = import 'doc-util/main.libsonnet';
         if r != ''
       ],
 
+  '#toCamelCase':: d.fn(
+    |||
+      `toCamelCase` transforms a string to camelCase format, splitting words by the `-`, `_` or spaces.
+      For example: `hello_world` becomes `helloWorld`.
+      For more info please check: http://en.wikipedia.org/wiki/CamelCase
+    |||,
+    [d.arg('str', d.T.string)]
+  ),
+  toCamelCase(str)::
+    local separators = std.set(std.findSubstr('_', str) + std.findSubstr('-', str) + std.findSubstr(' ', str));
+    local n = std.join('', [
+      if std.setMember(i - 1, separators)
+      then std.asciiUpper(str[i])
+      else str[i]
+      for i in std.range(0, std.length(str) - 1)
+      if !std.setMember(i, separators)
+    ]);
+    if std.length(n) == 0
+    then n
+    else std.asciiLower(n[0]) + n[1:],
 }
