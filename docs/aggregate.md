@@ -2,7 +2,7 @@
 permalink: /aggregate/
 ---
 
-# package aggregate
+# aggregate
 
 ```jsonnet
 local aggregate = import "github.com/jsonnet-libs/xtd/aggregate.libsonnet"

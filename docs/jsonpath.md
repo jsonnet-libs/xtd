@@ -2,7 +2,7 @@
 permalink: /jsonpath/
 ---
 
-# package jsonpath
+# jsonpath
 
 ```jsonnet
 local jsonpath = import "github.com/jsonnet-libs/xtd/jsonpath.libsonnet"

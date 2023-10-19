@@ -2,7 +2,7 @@
 permalink: /string/
 ---
 
-# package string
+# string
 
 ```jsonnet
 local string = import "github.com/jsonnet-libs/xtd/string.libsonnet"

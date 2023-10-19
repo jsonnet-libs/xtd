@@ -2,7 +2,7 @@
 permalink: /inspect/
 ---
 
-# package inspect
+# inspect
 
 ```jsonnet
 local inspect = import "github.com/jsonnet-libs/xtd/inspect.libsonnet"
