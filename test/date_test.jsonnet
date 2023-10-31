@@ -177,3 +177,43 @@ test.new(std.thisFile)
     expected=1577934245,
   ),
 )
+
++ test.case.new(
+  name='parseRFC3339 of 1970-01-01T00:00:00Z (standard unix zero)',
+  test=test.expect.eq(
+    actual=xtd.date.parseRFC3339('1970-01-01T00:00:00Z'),
+    expected={ year: 1970, month: 1, day: 1, hour: 0, minute: 0, second: 0 },
+  ),
+)
+
++ test.case.new(
+  name='parseRFC3339 of 2020-01-02T03:04:05Z (non-zero date)',
+  test=test.expect.eq(
+    actual=xtd.date.parseRFC3339('2020-01-02T03:04:05Z'),
+    expected={ year: 2020, month: 1, day: 2, hour: 3, minute: 4, second: 5 },
+  ),
+)
+
++ test.case.new(
+  name='parseRFC3339 of 2020-01-02 03:04:05Z (space separator)',
+  test=test.expect.eq(
+    actual=xtd.date.parseRFC3339('2020-01-02 03:04:05Z'),
+    expected={ year: 2020, month: 1, day: 2, hour: 3, minute: 4, second: 5 },
+  ),
+)
+
++ test.case.new(
+  name='parseRFC3339 of 2020-01-02t03:04:05Z (lowercase t separator and lowercase z)',
+  test=test.expect.eq(
+    actual=xtd.date.parseRFC3339('2020-01-02t03:04:05z'),
+    expected={ year: 2020, month: 1, day: 2, hour: 3, minute: 4, second: 5 },
+  ),
+)
+
++ test.case.new(
+  name='parseRFC3339(..).toUnixTimestamp()',
+  test=test.expect.eq(
+    actual=xtd.date.parseRFC3339('2020-01-02T03:04:05Z').toUnixTimestamp(),
+    expected=1577934245,
+  ),
+)
