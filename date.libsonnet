@@ -55,4 +55,52 @@ local d = import 'doc-util/main.libsonnet';
     if month > 2 && self.isLeapYear(year)
     then 1
     else 0,
+
+  // yearSeconds returns the number of seconds in the given year.
+  local yearSeconds(year) = (
+    if $.isLeapYear(year)
+    then 366 * 24 * 3600
+    else 365 * 24 * 3600
+  ),
+
+  // monthSeconds returns the number of seconds in the given month of a given year.
+  local monthSeconds(year, month) = (
+    commonYearMonthLength[month - 1] * 24 * 3600
+    + if month == 2 && $.isLeapYear(year) then 86400 else 0
+  ),
+
+  // sumYearsSeconds returns the number of seconds in all years since 1970 up to year-1.
+  local sumYearsSeconds(year) = std.foldl(
+    function(acc, y) acc + yearSeconds(y),
+    std.range(1970, year - 1),
+    0,
+  ),
+
+  // sumMonthsSeconds returns the number of seconds in all months up to month-1 of the given year.
+  local sumMonthsSeconds(year, month) = std.foldl(
+    function(acc, m) acc + monthSeconds(year, m),
+    std.range(1, month - 1),
+    0,
+  ),
+
+  // sumDaysSeconds returns the number of seconds in all days up to day-1.
+  local sumDaysSeconds(day) = (day - 1) * 24 * 3600,
+
+  '#toUnixTimestamp': d.fn(
+    |||
+      `toUnixTimestamp` calculates the unix timestamp of a given date.
+    |||,
+    [
+      d.arg('year', d.T.number),
+      d.arg('month', d.T.number),
+      d.arg('day', d.T.number),
+      d.arg('hour', d.T.number),
+      d.arg('minute', d.T.number),
+      d.arg('second', d.T.number),
+    ],
+  ),
+  toUnixTimestamp(year, month, day, hour, minute, second)::
+    sumYearsSeconds(year) + sumMonthsSeconds(year, month) + sumDaysSeconds(day) + hour * 3600 + minute * 60 + second,
+
+
 }

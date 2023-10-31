@@ -129,3 +129,51 @@ test.new(std.thisFile)
     expected=166,
   )
 )
+
++ test.case.new(
+  name='toUnixTimestamp of 1970-01-01 00:00:00 (zero)',
+  test=test.expect.eq(
+    actual=xtd.date.toUnixTimestamp(1970, 1, 1, 0, 0, 0),
+    expected=0,
+  ),
+)
+
++ test.case.new(
+  name='toUnixTimestamp of 1970-01-02 00:00:00 (one day)',
+  test=test.expect.eq(
+    actual=xtd.date.toUnixTimestamp(1970, 1, 2, 0, 0, 0),
+    expected=86400,
+  ),
+)
+
++ test.case.new(
+  name='toUnixTimestamp of 1971-01-01 00:00:00 (one year)',
+  test=test.expect.eq(
+    actual=xtd.date.toUnixTimestamp(1971, 1, 1, 0, 0, 0),
+    expected=365 * 24 * 3600,
+  ),
+)
+
++ test.case.new(
+  name='toUnixTimestamp of 1972-03-01 00:00:00 (month of leap year)',
+  test=test.expect.eq(
+    actual=xtd.date.toUnixTimestamp(1972, 3, 1, 0, 0, 0),
+    expected=2 * 365 * 24 * 3600 + 31 * 24 * 3600 + 29 * 24 * 3600,
+  ),
+)
+
++ test.case.new(
+  name='toUnixTimestamp of 1974-01-01 00:00:00 (incl leap year)',
+  test=test.expect.eq(
+    actual=xtd.date.toUnixTimestamp(1974, 1, 1, 0, 0, 0),
+    expected=(4 * 365 + 1) * 24 * 3600,
+  ),
+)
+
++ test.case.new(
+  name='toUnixTimestamp of 2020-01-02 03:04:05 (full date)',
+  test=test.expect.eq(
+    actual=xtd.date.toUnixTimestamp(2020, 1, 2, 3, 4, 5),
+    expected=1577934245,
+  ),
+)
