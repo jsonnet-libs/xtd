@@ -15,6 +15,8 @@ local date = import "github.com/jsonnet-libs/xtd/date.libsonnet"
 * [`fn dayOfWeek(year, month, day)`](#fn-dayofweek)
 * [`fn dayOfYear(year, month, day)`](#fn-dayofyear)
 * [`fn isLeapYear(year)`](#fn-isleapyear)
+* [`fn parseRFC3339(input)`](#fn-parserfc3339)
+* [`fn toUnixTimestamp(year, month, day, hour, minute, second)`](#fn-tounixtimestamp)
 
 ## Fields
 
@@ -43,3 +45,22 @@ isLeapYear(year)
 ```
 
 `isLeapYear` returns true if the given year is a leap year.
+
+### fn parseRFC3339
+
+```ts
+parseRFC3339(input)
+```
+
+`parseRFC3339` parses an RFC3339-formatted date & time string into an object containing the 'year', 'month', 'day', 'hour', 'minute' and 'second fields.
+This is a limited implementation that does not support timezones (so it requires an UTC input ending in 'Z' or 'z') nor sub-second precision.
+The returned object has a `toUnixTimestamp()` method that can be used to obtain the unix timestamp of the parsed date.
+
+
+### fn toUnixTimestamp
+
+```ts
+toUnixTimestamp(year, month, day, hour, minute, second)
+```
+
+`toUnixTimestamp` calculates the unix timestamp of a given date.
