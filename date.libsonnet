@@ -146,7 +146,7 @@ local d = import 'doc-util/main.libsonnet';
 
   '#parseRFC3339': d.fn(
     |||
-      `parseRFC3339` parses an RFC3339-formatted date & time string into an object containing the 'year', 'month', 'day', 'hour', 'minute' and 'second fields.
+      `parseRFC3339` parses an RFC3339-formatted date & time string (like `2020-01-02T03:04:05Z`) into an object containing the 'year', 'month', 'day', 'hour', 'minute' and 'second fields.
       This is a limited implementation that does not support timezones (so it requires an UTC input ending in 'Z' or 'z') nor sub-second precision.
       The returned object has a `toUnixTimestamp()` method that can be used to obtain the unix timestamp of the parsed date.
     |||,
