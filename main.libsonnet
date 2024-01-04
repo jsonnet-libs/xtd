@@ -19,6 +19,7 @@ local d = import 'doc-util/main.libsonnet';
   date: (import './date.libsonnet'),
   inspect: (import './inspect.libsonnet'),
   jsonpath: (import './jsonpath.libsonnet'),
+  number: (import './number.libsonnet'),
   string: (import './string.libsonnet'),
   url: (import './url.libsonnet'),
 }

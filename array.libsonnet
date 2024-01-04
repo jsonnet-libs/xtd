@@ -34,4 +34,22 @@ local d = import 'doc-util/main.libsonnet';
         else std.length(indexable),
     };
     indexable[invar.index:invar.end:step],
+
+  '#filterMapWithIndex':: d.fn(
+    |||
+      `filterMapWithIndex` works the same as `std.filterMap` with the addition that the index is passed to the functions.
+
+      `filter_func` and `map_func` function signature: `function(index, array_item)`
+    |||,
+    [
+      d.arg('filter_func', d.T.func),
+      d.arg('map_func', d.T.func),
+      d.arg('arr', d.T.array),
+    ],
+  ),
+  filterMapWithIndex(filter_func, map_func, arr): [
+    map_func(i, arr[i])
+    for i in std.range(0, std.length(arr) - 1)
+    if filter_func(i, arr[i])
+  ],
 }
