@@ -12,9 +12,21 @@ local array = import "github.com/jsonnet-libs/xtd/array.libsonnet"
 
 ## Index
 
+* [`fn filterMapWithIndex(filter_func, map_func, arr)`](#fn-filtermapwithindex)
 * [`fn slice(indexable, index, end='null', step=1)`](#fn-slice)
 
 ## Fields
+
+### fn filterMapWithIndex
+
+```ts
+filterMapWithIndex(filter_func, map_func, arr)
+```
+
+`filterMapWithIndex` works the same as `std.filterMap` with the addition that the index is passed to the functions.
+
+`filter_func` and `map_func` function signature: `function(index, array_item)`
+
 
 ### fn slice
 
