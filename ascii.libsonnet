@@ -13,27 +13,17 @@ local d = import 'doc-util/main.libsonnet';
     '`isLower` reports whether ASCII character `c` is a lower case letter',
     [d.arg('c', d.T.string)]
   ),
-  isLower(c):
-    if cp(c) >= 97 && cp(c) < 123
-    then true
-    else false,
+  isLower(c): cp(c) >= 97 && cp(c) < 123,
 
   '#isUpper':: d.fn(
     '`isUpper` reports whether ASCII character `c` is a upper case letter',
     [d.arg('c', d.T.string)]
   ),
-  isUpper(c):
-    if cp(c) >= 65 && cp(c) < 91
-    then true
-    else false,
+  isUpper(c): cp(c) >= 65 && cp(c) < 91,
 
   '#isNumber':: d.fn(
     '`isNumber` reports whether character `c` is a number.',
     [d.arg('c', d.T.string)]
   ),
-  isNumber(c):
-    if std.isNumber(c) || (cp(c) >= 48 && cp(c) < 58)
-    then true
-    else false,
-
+  isNumber(c): std.isNumber(c) || (cp(c) >= 48 && cp(c) < 58),
 }
