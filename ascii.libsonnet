@@ -26,4 +26,10 @@ local d = import 'github.com/jsonnet-libs/docsonnet/doc-util/main.libsonnet';
     [d.arg('c', d.T.string)]
   ),
   isNumber(c): std.isNumber(c) || (cp(c) >= 48 && cp(c) < 58),
+
+  '#isStringNumeric':: d.fn(
+    '`isStringNumeric` reports whether string `s` consists only of numeric characters.',
+    [d.arg('c', d.T.string)]
+  ),
+  isStringNumeric(s): std.all([self.isNumber(c) for c in std.toArray(s)]),
 }
