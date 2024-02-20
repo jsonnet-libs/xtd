@@ -29,7 +29,10 @@ local d = import 'github.com/jsonnet-libs/docsonnet/doc-util/main.libsonnet';
 
   '#isStringNumeric':: d.fn(
     '`isStringNumeric` reports whether string `s` consists only of numeric characters.',
-    [d.arg('c', d.T.string)]
+    [d.arg('s', d.T.string)]
   ),
-  isStringNumeric(s): std.all([self.isNumber(c) for c in std.toArray(s)]),
+  isStringNumeric(s): std.all([
+    self.isNumber(c)
+    for c in s
+  ]),
 }
