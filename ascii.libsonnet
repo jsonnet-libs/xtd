@@ -31,8 +31,5 @@ local d = import 'github.com/jsonnet-libs/docsonnet/doc-util/main.libsonnet';
     '`isStringNumeric` reports whether string `s` consists only of numeric characters.',
     [d.arg('str', d.T.string)]
   ),
-  isStringNumeric(str): std.all([
-    self.isNumber(c)
-    for c in std.stringChars(str)
-  ]),
+  isStringNumeric(str): std.all(std.map(self.isNumber, std.stringChars(str)),
 }
