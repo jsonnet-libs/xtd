@@ -14,8 +14,8 @@ local ascii = import "github.com/jsonnet-libs/xtd/ascii.libsonnet"
 
 * [`fn isLower(c)`](#fn-islower)
 * [`fn isNumber(c)`](#fn-isnumber)
+* [`fn isStringNumeric(str)`](#fn-isstringnumeric)
 * [`fn isUpper(c)`](#fn-isupper)
-* [`fn isStringNumeric(c)`](#fn-isstringnumeric)
 
 ## Fields
 
@@ -35,6 +35,14 @@ isNumber(c)
 
 `isNumber` reports whether character `c` is a number.
 
+### fn isStringNumeric
+
+```ts
+isStringNumeric(str)
+```
+
+`isStringNumeric` reports whether string `s` consists only of numeric characters.
+
 ### fn isUpper
 
 ```ts
@@ -42,11 +50,3 @@ isUpper(c)
 ```
 
 `isUpper` reports whether ASCII character `c` is a upper case letter
-
-### fn isStringNumeric
-
-```ts
-isStringNumeric(c)
-```
-
-`isStringNumeric` reports whether all characters in the string are numbers
