@@ -22,5 +22,6 @@ in the future, but also provides a place for less general, yet useful utilities.
 * [inspect](inspect.md)
 * [jsonpath](jsonpath.md)
 * [number](number.md)
+* [reflect](reflect.md)
 * [string](string.md)
 * [url](url.md)

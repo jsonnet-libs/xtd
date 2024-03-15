@@ -20,6 +20,7 @@ local d = import 'github.com/jsonnet-libs/docsonnet/doc-util/main.libsonnet';
   inspect: (import './inspect.libsonnet'),
   jsonpath: (import './jsonpath.libsonnet'),
   number: (import './number.libsonnet'),
+  reflect: (import './reflect.libsonnet'),
   string: (import './string.libsonnet'),
   url: (import './url.libsonnet'),
 }
