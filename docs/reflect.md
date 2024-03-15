@@ -12,14 +12,14 @@ local reflect = import "github.com/jsonnet-libs/xtd/reflect.libsonnet"
 
 ## Index
 
-* [`fn prune(a, recurse=false, only_null=false)`](#fn-prune)
+* [`fn prune(a, recurse=true, only_null=false)`](#fn-prune)
 
 ## Fields
 
 ### fn prune
 
 ```ts
-prune(a, recurse=false, only_null=false)
+prune(a, recurse=true, only_null=false)
 ```
 
 `prune` works the same as `std.prune` but with the options to disable recursion and only pruning `null` values.

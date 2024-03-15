@@ -11,7 +11,7 @@ local d = import 'github.com/jsonnet-libs/docsonnet/doc-util/main.libsonnet';
     '`prune` works the same as `std.prune` but with the options to disable recursion and only pruning `null` values.',
     [
       d.arg('a', d.T.any),
-      d.arg('recurse', d.T.bool, default=false),
+      d.arg('recurse', d.T.bool, default=true),
       d.arg('only_null', d.T.bool, default=false),
     ]
   ),
@@ -44,17 +44,4 @@ local d = import 'github.com/jsonnet-libs/docsonnet/doc-util/main.libsonnet';
     }
     else
       a,
-
-  a:: $.prune(
-    {
-      a: {},
-      b: null,
-      c: {
-        d: {},
-        e: null,
-      },
-    },
-    recurse=false,
-    only_null=true,
-  ),
 }
