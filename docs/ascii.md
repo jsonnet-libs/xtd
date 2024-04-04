@@ -41,7 +41,7 @@ isNumber(c)
 isStringNumeric(str)
 ```
 
-`isStringNumeric` reports whether string `s` is a number as defined by [JSON](https://www.json.org/json-en.html) but without the leading minus.
+`isStringNumeric` reports whether string `s` is a number as defined by [JSON](https://www.json.org/json-en.html).
 
 ### fn isUpper
 

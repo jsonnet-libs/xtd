@@ -28,7 +28,7 @@ local d = import 'github.com/jsonnet-libs/docsonnet/doc-util/main.libsonnet';
   isNumber(c): std.isNumber(c) || (cp(c) >= 48 && cp(c) < 58),
 
   '#isStringNumeric':: d.fn(
-    '`isStringNumeric` reports whether string `s` is a number as defined by [JSON](https://www.json.org/json-en.html) but without the leading minus.',
+    '`isStringNumeric` reports whether string `s` is a number as defined by [JSON](https://www.json.org/json-en.html).',
     [d.arg('str', d.T.string)]
   ),
   isStringNumeric(str):
