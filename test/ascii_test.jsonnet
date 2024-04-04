@@ -39,7 +39,7 @@ test.new(std.thisFile)
   name='empty',
   test=test.expect.eq(
     actual=ascii.isStringNumeric(''),
-    expected=false,
+    expected=true,
   )
 )
 
@@ -49,7 +49,7 @@ test.new(std.thisFile)
     + test.case.new(
       name='valid: ' + str,
       test=test.expect.eq(
-        actual=ascii.isStringNumeric(str),
+        actual=ascii.isStringJSONNumeric(str),
         expected=true,
       )
     ),
@@ -72,7 +72,7 @@ test.new(std.thisFile)
     + test.case.new(
       name='invalid: ' + str,
       test=test.expect.eq(
-        actual=ascii.isStringNumeric(str),
+        actual=ascii.isStringJSONNumeric(str),
         expected=false,
       )
     ),

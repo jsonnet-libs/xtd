@@ -28,10 +28,16 @@ local d = import 'github.com/jsonnet-libs/docsonnet/doc-util/main.libsonnet';
   isNumber(c): std.isNumber(c) || (cp(c) >= 48 && cp(c) < 58),
 
   '#isStringNumeric':: d.fn(
-    '`isStringNumeric` reports whether string `s` is a number as defined by [JSON](https://www.json.org/json-en.html).',
+    '`isStringNumeric` reports whether string `s` consists only of numeric characters.',
     [d.arg('str', d.T.string)]
   ),
-  isStringNumeric(str):
+  isStringNumeric(str): std.all(std.map(self.isNumber, std.stringChars(str))),
+
+  '#isStringJSONNumeric':: d.fn(
+    '`isStringJSONNumeric` reports whether string `s` is a number as defined by [JSON](https://www.json.org/json-en.html).',
+    [d.arg('str', d.T.string)]
+  ),
+  isStringJSONNumeric(str):
     //                           "1"            "9"
     local onenine(c) = (cp(c) >= 49 && cp(c) <= 57);
 
