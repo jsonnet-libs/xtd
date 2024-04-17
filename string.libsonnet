@@ -26,9 +26,25 @@ local d = import 'github.com/jsonnet-libs/docsonnet/doc-util/main.libsonnet';
   splitEscape(str, c, escape='\\'):
     std.map(
       function(i)
-        std.strReplace(i, BelRune, escape + c),
+        std.strReplace(
+          std.strReplace(
+            i,
+            escape + BelRune,
+            escape,
+          ),
+          BelRune,
+          escape + c
+        ),
       std.split(
-        std.strReplace(str, escape + c, BelRune),
+        std.strReplace(
+          std.strReplace(
+            str,
+            escape,
+            escape + BelRune,
+          ),
+          escape + c,
+          BelRune
+        ),
         c,
       )
     ),
