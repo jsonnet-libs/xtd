@@ -18,7 +18,8 @@ local d = import 'github.com/jsonnet-libs/docsonnet/doc-util/main.libsonnet';
     |||,
     [d.arg('str', d.T.string)]
   ),
-  capitalize(str): std.asciiUpper(str[0]) + std.substr(str, 1, std.length(str) - 1),
+  capitalize(str): if std.length(str) > 0 then
+    std.asciiUpper(str[0]) + std.substr(str, 1, std.length(str) - 1) else '',
 
   '#splitEscape':: d.fn(
     |||
