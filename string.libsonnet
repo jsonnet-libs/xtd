@@ -12,6 +12,15 @@ local d = import 'github.com/jsonnet-libs/docsonnet/doc-util/main.libsonnet';
   // character and thereby will unlikely be in a valid key by accident. Only when we include it.
   local BelRune = std.char(7),
 
+  '#capitalize':: d.fn(
+    |||
+      `capitalize` will uppercase the first letter of string.
+    |||,
+    [d.arg('str', d.T.string)]
+  ),
+  capitalize(str): if std.length(str) > 0 then
+    std.asciiUpper(str[0]) + std.substr(str, 1, std.length(str) - 1) else '',
+
   '#splitEscape':: d.fn(
     |||
       `split` works the same as `std.split` but with support for escaping the dividing
