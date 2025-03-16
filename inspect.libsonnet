@@ -206,4 +206,20 @@ local d = import 'github.com/jsonnet-libs/docsonnet/doc-util/main.libsonnet';
         function(o) o.kind == kind,
         objects
       ),
+
+  '#deep':: d.fn(
+    |||
+      `deepMap` traverses the whole tree of `x` and applies `func` indiscriminately.
+    |||,
+    args=[
+      d.arg('func', d.T.func),
+      d.arg('x', d.T.any),
+    ]
+  ),
+  deepMap(func, x):
+    if std.isObject(x)
+    then std.mapWithKey(function(_, y) self.deepMap(func, y), func(x))
+    else if std.isArray(x)
+    then std.map(function(y) self.deepMap(func, y), func(x))
+    else func(x),
 }
