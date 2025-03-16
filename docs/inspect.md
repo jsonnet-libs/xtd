@@ -26,7 +26,9 @@ local inspect = import "github.com/jsonnet-libs/xtd/inspect.libsonnet"
 deep(func, x)
 ```
 
-`deepMap` traverses the whole tree of `x` and applies `func` indiscriminately.
+`deepMap` traverses the whole tree of `x` and applies `func(item)` indiscriminately.
+
+If the type of `item` is an object or array, then `func` must return the same type.
 
 
 ### fn diff

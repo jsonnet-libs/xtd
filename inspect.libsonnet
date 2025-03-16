@@ -209,7 +209,9 @@ local d = import 'github.com/jsonnet-libs/docsonnet/doc-util/main.libsonnet';
 
   '#deep':: d.fn(
     |||
-      `deepMap` traverses the whole tree of `x` and applies `func` indiscriminately.
+      `deepMap` traverses the whole tree of `x` and applies `func(item)` indiscriminately.
+
+      If the type of `item` is an object or array, then `func` must return the same type.
     |||,
     args=[
       d.arg('func', d.T.func),
