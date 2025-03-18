@@ -207,7 +207,7 @@ local d = import 'github.com/jsonnet-libs/docsonnet/doc-util/main.libsonnet';
         objects
       ),
 
-  '#deep':: d.fn(
+  '#deepMap':: d.fn(
     |||
       `deepMap` traverses the whole tree of `x` and applies `func(item)` indiscriminately.
 

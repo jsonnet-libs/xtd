@@ -12,7 +12,7 @@ local inspect = import "github.com/jsonnet-libs/xtd/inspect.libsonnet"
 
 ## Index
 
-* [`fn deep(func, x)`](#fn-deep)
+* [`fn deepMap(func, x)`](#fn-deepmap)
 * [`fn diff(input1, input2)`](#fn-diff)
 * [`fn filterKubernetesObjects(object, kind='')`](#fn-filterkubernetesobjects)
 * [`fn filterObjects(filter_func, x)`](#fn-filterobjects)
@@ -20,10 +20,10 @@ local inspect = import "github.com/jsonnet-libs/xtd/inspect.libsonnet"
 
 ## Fields
 
-### fn deep
+### fn deepMap
 
 ```ts
-deep(func, x)
+deepMap(func, x)
 ```
 
 `deepMap` traverses the whole tree of `x` and applies `func(item)` indiscriminately.
