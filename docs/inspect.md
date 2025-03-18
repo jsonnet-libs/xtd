@@ -28,8 +28,6 @@ deepMap(func, x)
 
 `deepMap` traverses the whole tree of `x` and applies `func(item)` indiscriminately.
 
-If the type of `item` is an object or array, then `func` must return the same type.
-
 
 ### fn diff
 
