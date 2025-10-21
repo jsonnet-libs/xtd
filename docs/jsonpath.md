@@ -15,6 +15,7 @@ local jsonpath = import "github.com/jsonnet-libs/xtd/jsonpath.libsonnet"
 * [`fn convertBracketToDot(path)`](#fn-convertbrackettodot)
 * [`fn getJSONPath(source, path, default='null')`](#fn-getjsonpath)
 * [`fn parseFilterExpr(path)`](#fn-parsefilterexpr)
+* [`fn withJSONPathValue(path, value)`](#fn-withjsonpathvalue)
 
 ## Fields
 
@@ -51,3 +52,28 @@ parseFilterExpr(path)
 
  It supports comparisons (<, <=, >, >=) and equality checks (==, !=). If it doesn't
  have an operator, it will check if the `expr` value exists.
+
+
+### fn withJSONPathValue
+
+```ts
+withJSONPathValue(path, value)
+```
+
+`withJSONPathValue` creates a recursive mixin object with the value at `path` set to `value`.
+
+Example:
+```jsonnet
+jsonpath.withJSONPathValue('key.nested.key', 'value'),
+```
+
+Output:
+```jsonnet
+{
+  key+: {
+    nested+: {
+      key: 'value',
+    },
+  },
+}
+```
