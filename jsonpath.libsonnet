@@ -43,6 +43,63 @@ local d = import 'github.com/jsonnet-libs/docsonnet/doc-util/main.libsonnet';
       d.arg('path', d.T.string,),
     ]
   ),
+  '#withJSONPathValue': d.fn(
+    |||
+      `withJSONPathValue` creates a recursive mixin object with the value at `path` set to `value`.
+
+      Example:
+      ```jsonnet
+      jsonpath.withJSONPathValue('key.nested.key', 'value'),
+      ```
+
+      Output:
+      ```jsonnet
+      {
+        key+: {
+          nested+: {
+            key: 'value',
+          },
+        },
+      }
+      ```
+    |||,
+    [
+      d.arg('path', d.T.string),
+      d.arg('value', d.T.any),
+    ]
+  ),
+  withJSONPathValue(path, value):
+    local dotPath = self.convertBracketToDot(path);
+    local keys = std.filter(
+      function(k) k != '' && k != '$',
+      xtd.string.splitEscape(dotPath, '.')
+    );
+    local isNumeric(str) =
+      std.length(str) > 0
+      && std.foldl(
+        function(acc, c) acc && std.member('0123456789', c),
+        std.stringChars(str),
+        true
+      );
+    std.foldl(
+      function(acc, key)
+        if acc == null
+        then
+          if isNumeric(key)
+          then
+            local idx = std.parseInt(key);
+            std.makeArray(idx + 1, function(i) if i == idx then value else null)
+          else { [key]: value }
+        else
+          if isNumeric(key)
+          then
+            local idx = std.parseInt(key);
+            std.makeArray(idx + 1, function(i) if i == idx then acc else null)
+          else { [key]+: acc },
+      std.reverse(keys),
+      null,
+    ),
+
   convertBracketToDot(path):
     if std.length(std.findSubstr('[', path)) > 0
     then

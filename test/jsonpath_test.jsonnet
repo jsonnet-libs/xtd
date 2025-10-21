@@ -303,3 +303,101 @@ test.new(std.thisFile)
     }],
   )
 )
+
++ test.case.new(
+  name='withJSONPathValue - single key',
+  test=test.expect.eq(
+    actual=jsonpath.withJSONPathValue('.key', 'value'),
+    expected={
+      key: 'value',
+    },
+  )
+)
++ test.case.new(
+  name='withJSONPathValue - nested key',
+  test=test.expect.eq(
+    actual=jsonpath.withJSONPathValue('.key.nested.key', 'value'),
+    expected={
+      key: {
+        nested: {
+          key: 'value',
+        },
+      },
+    },
+  )
+)
++ test.case.new(
+  name='withJSONPathValue - single key mixin',
+  test=test.expect.eq(
+    actual={ key2: 'value2' } + jsonpath.withJSONPathValue('.key', 'value'),
+    expected={
+      key: 'value',
+      key2: 'value2',
+    },
+  )
+)
++ test.case.new(
+  name='withJSONPathValue - single key mixin override',
+  test=test.expect.eq(
+    actual={ key: 'value' } + jsonpath.withJSONPathValue('.key', 'value2'),
+    expected={
+      key: 'value2',
+    },
+  )
+)
++ test.case.new(
+  name='withJSONPathValue - nested key mixin',
+  test=test.expect.eq(
+    actual={ key: { nested: { key2: 'value2' } } } + jsonpath.withJSONPathValue('.key.nested.key', 'value'),
+    expected={
+      key: {
+        nested: {
+          key: 'value',
+          key2: 'value2',
+        },
+      },
+    },
+  )
+)
++ test.case.new(
+  name='withJSONPathValue - nested key mixin override',
+  test=test.expect.eq(
+    actual={ key: { nested: { key: 'value' } } } + jsonpath.withJSONPathValue('.key.nested.key', 'value2'),
+    expected={
+      key: {
+        nested: {
+          key: 'value2',
+        },
+      },
+    },
+  )
+)
++ test.case.new(
+  name='withJSONPathValue - complex case',
+  test=test.expect.eq(
+    actual={ key: { nested: { key2: 'value2' } } }
+           + jsonpath.withJSONPathValue('.key.nested.nestedtwo', { key: 'value' })
+           + jsonpath.withJSONPathValue('.key.nested.nestedtwo.key', 'value3'),
+    expected={
+      key: {
+        nested: {
+          nestedtwo: {
+            key: 'value3',
+          },
+          key2: 'value2',
+        },
+      },
+    },
+  )
+)
++ test.case.new(
+  name='withJSONPathValue - list path',
+  test=test.expect.eq(
+    actual=jsonpath.withJSONPathValue('mylist[0]', 'value'),
+    expected={
+      mylist: [
+        'value',
+      ],
+    },
+  )
+)
