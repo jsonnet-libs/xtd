@@ -81,3 +81,32 @@ test.new(std.thisFile)
     expected=[0, 2, 4],
   )
 )
+
++ test.case.new(
+  name='chunkArray',
+  test=test.expect.eq(
+    actual=array.chunkArray(arr, maxSize=3),
+    expected=[[0, 1, 2], [3, 4, 5], [6, 7, 8], [9, 10]],
+  )
+)
++ test.case.new(
+  name='chunkArray - maxSize is 2',
+  test=test.expect.eq(
+    actual=array.chunkArray(arr, maxSize=2),
+    expected=[[0, 1], [2, 3], [4, 5], [6, 7], [8, 9], [10]],
+  )
+)
++ test.case.new(
+  name='chunkArray - maxSize is larger than array length',
+  test=test.expect.eq(
+    actual=array.chunkArray(arr, maxSize=100),
+    expected=[[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]],
+  )
+)
++ test.case.new(
+  name='chunkArray - maxSize is 1',
+  test=test.expect.eq(
+    actual=array.chunkArray(arr, maxSize=1),
+    expected=[[0], [1], [2], [3], [4], [5], [6], [7], [8], [9], [10]],
+  )
+)
